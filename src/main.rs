@@ -43,6 +43,14 @@ fn main() {
 
     let mut rl = DefaultEditor::new().expect("failed to initialize the line editor");
 
+    let history_path = env::var_os("HOME")
+        .map(PathBuf::from)
+        .map(|home| home.join(".sharp_history"));
+
+    if let Some(path) = &history_path {
+        let _ = rl.load_history(path);
+    }
+
     loop {
         print!("{PROMPT}");
         io::stdout().flush().expect("failed to flush stdout");
@@ -87,6 +95,10 @@ fn main() {
             Ok(_) => {}
             Err(error) => eprintln!("sh: {command}: {error}"),
         }
+    }
+
+    if let Some(path) = &history_path {
+        rl.save_history(path);
     }
 }
 
