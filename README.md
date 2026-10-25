@@ -53,7 +53,7 @@ Bindings are provided by `rustyline`'s default emacs mode (and vi mode with `Esc
 sharp has now a command history file for persistent history across sessions. It uses Rustylines
 builtin `save_history()` function to save the command history to `~/.sharp_history` on exit.
 
-### Latest(major) 25.10.2026, 14:30: command history with rustyline
+### Latest(major) 25.10.2026, 13:53: command history with rustyline
 
 sharp now has persistent, editable command history using the `rustyline` crate. This replaces
 the bare `stdin.lock().read_line()` loop with a proper line editor.
