@@ -116,11 +116,16 @@ The binary lands in `target/release/sharp`.
 ./target/release/sharp
 ```
 
-Or install it onto your `PATH`:
+~~Or install it onto your `PATH`:~~
 
-```sh
-cargo install --path .
-```
+
+~~cargo install --path .~~
+
+`cargo install --path .` Somehow doesn't work anymore, so idk, leave it out.
+
+If you want to still install to your `PATH`, copy the compiled binary manually to your
+`PATH` (Either only your user, `~/.local/bin/` or all users `/usr/bin/`)
+
 
 Then just run:
 
