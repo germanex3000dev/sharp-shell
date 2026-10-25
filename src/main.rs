@@ -1,4 +1,4 @@
-//! `retard` — a very small shell.
+//! `sharp` — a very small shell.
 //!
 //! It reads one command per line from standard input, splits the line on
 //! whitespace and runs the first word as a program, passing the rest as
@@ -25,7 +25,7 @@ use std::io::{self, BufRead, Write};
 use std::process::Command;
 
 /// String printed in front of every input line.
-const PROMPT: &str = "> ";
+const PROMPT: &str = "$ > ";
 
 /// Reported as the exit status of a child that died from a signal rather than
 /// returning a code of its own.

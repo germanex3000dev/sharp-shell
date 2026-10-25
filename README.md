@@ -1,8 +1,8 @@
-# retard
+# sharp
 
 A very small shell written in Rust.
 
-`retard` reads one command per line, splits it on whitespace and runs the first
+`sharp` reads one command per line, splits it on whitespace and runs the first
 word as a program with the remaining words as arguments. It is about a hundred
 lines long and exists to show how far `std::process::Command` gets you. So 
 basically, it's pointless, again. But remember, this is just a small first version. 
@@ -31,12 +31,12 @@ Rust 1.85 or newer (the crate uses edition 2024).
 cargo build --release
 ```
 
-The binary lands in `target/release/retard`.
+The binary lands in `target/release/sharp`.
 
 ## Run
 
 ```sh
-./target/release/retard
+./target/release/sharp
 ```
 
 Or install it onto your `PATH` with:
@@ -48,7 +48,7 @@ cargo install --path .
 ## Usage
 
 ```console
-$ ./target/release/retard
+$ ./target/release/sharp
 > echo hello world
 hello world
 > cd /tmp
