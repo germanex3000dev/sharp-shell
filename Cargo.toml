@@ -1,6 +1,6 @@
 [package]
 name = "sharp"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "A very small shell written in Rust."
 license = "MIT"
@@ -10,3 +10,4 @@ keywords = ["shell", "terminal", "cli", "repl"]
 categories = ["command-line-utilities"]
 
 [dependencies]
+rustyline = "16.0.0"
