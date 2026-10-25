@@ -23,6 +23,11 @@
 use std::env;
 use std::io::{self, BufRead, Write};
 use std::process::Command;
+use std::path::PathBuf;
+
+use rustyline::error::ReadlineError;
+use rustyline::DefaultEditor;
+
 
 /// String printed in front of every input line.
 const PROMPT: &str = "$ > ";
@@ -36,6 +41,8 @@ fn main() {
     let mut input = stdin.lock();
     let mut line = String::new();
 
+    let mut rl = DefaultEditor::new().expect("failed to initialize the line editor");
+
     loop {
         print!("{PROMPT}");
         io::stdout().flush().expect("failed to flush stdout");
@@ -43,17 +50,24 @@ fn main() {
         // Reuse the same buffer every iteration so the loop does not allocate
         // a new String per prompt.
         line.clear();
-        match input.read_line(&mut line) {
-            // End of file (Ctrl-D) or an unreadable stdin: end the session.
-            Ok(0) | Err(_) => break,
-            Ok(_) => {}
-        }
+        let line = match rl.readline(PROMPT) {
+            Ok(line) => line,
+            Err(ReadlineError::Interrupted) | Err(ReadlineError::Eof) => break,
+            Err(error) => {
+                eprintln!("sharp: {error}");
+                break;
+            }
+        };
 
         let words: Vec<&str> = line.split_whitespace().collect();
         let Some((command, args)) = words.split_first() else {
             // Blank line, just print the prompt again.
             continue;
         };
+
+        if !line.trim().is_empty() {
+            let _ = rl.add_history_entry(line.as_str());
+        }
 
         if *command == "exit" {
             break;
