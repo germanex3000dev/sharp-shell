@@ -27,6 +27,7 @@ use std::path::PathBuf;
 
 use rustyline::error::ReadlineError;
 use rustyline::DefaultEditor;
+use rustyline::history::History;
 
 
 /// String printed in front of every input line.
@@ -88,6 +89,11 @@ fn main() {
             continue;
         }
 
+        if *command == "history" {
+            print_history(&rl);
+            continue;
+        }
+
         match Command::new(command).args(args).status() {
             Ok(status) if !status.success() => {
                 eprintln!("exit {}", status.code().unwrap_or(KILLED_BY_SIGNAL));
@@ -112,4 +118,16 @@ fn change_directory(path: Option<&str>) -> io::Result<()> {
         None => env::var("HOME").unwrap_or_default(),
     };
     env::set_current_dir(target)
+}
+
+fn print_history(rl: &DefaultEditor) {
+    let history = rl.history();
+    if history.is_empty() {
+        println!("(history is empty)");
+        return;
+    }
+    println!("history");
+    for (i, entry) in history.iter().enumerate() {
+        println!("  {}  {}", i + 1, entry);
+    }
 }
