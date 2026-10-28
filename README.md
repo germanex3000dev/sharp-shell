@@ -22,7 +22,7 @@ A very small shell written in Rust.
 - `cd` builtin, including a bare `cd` to go to `$HOME`
 - `exit` builtin, plus `Ctrl-D` to end the session
 - Prints the same exit code a real shell would for a failing command
-- **Command history** via `rustyline` — up/down arrows navigate, `Ctrl-R` searches
+- **Command history** via `rustyline` — up/down arrows navigate, `Ctrl+R` searches, `history` lists entries
 - No external dependencies beyond `rustyline` (single crate)
 
 ## Keybindings
